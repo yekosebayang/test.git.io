@@ -2,34 +2,25 @@ import React from 'react'
 
 
 const TableProduct = () => {
-    const arr = {
-        daftar: [
+    let arr = [
           { no: 1, nama: 'Asa', job: 'Berlari'},
           { no: 2, nama: 'Asi', job: 'Menari'},
           { no: 3, nama: 'Asu', job: 'Mendaki'},
           { no: 4, nama: 'Ase', job: 'Bercocok Tanam'}
         ]
-      }
     
       const renderArr = () => {
-        return arr.daftar.map((daftar) => {
-          const {no,nama,job} = daftar
+        return arr.map((val, index) => {
           return (
             <tr>
-              <td>{no}</td>
-              <td>{nama}</td>
-              <td>{job}</td>
+              <td>{index+1}</td>
+              <td>{val.nama}</td>
+              <td>{val.job}</td>
             </tr>
           
           )
         })
         }
-        // const renderTableHeader = () => {
-        //     let header = Object.keys(this.state.students[0])
-        //     return header.map((key, index) => {
-        //        return <th key={index}>{key.toUpperCase()}</th>
-        //     })
-        //  }
 
         const renderHeader = () => {
            return (
@@ -46,12 +37,14 @@ const TableProduct = () => {
             <table>
                 <thead>
                     <tr>
-                        <th>
-                            {renderHeader()}
-                            {renderArr()}
-                        </th>
+                      <th>No</th>
+                      <th>Nama</th>
+                      <th>Pekerjaan</th>
                     </tr>
                 </thead>
+                <tbody>
+                      {renderArr()}
+                </tbody>
             </table>
         </div>
     )
