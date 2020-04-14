@@ -2,6 +2,9 @@ import React from 'react';
 import './App.css'
 import './bootstrap.css'
 import BookCard from './view/components/BookCard.jsx'
+import CounterScreen from './view/screens/CounterScreen.jsx'
+import InputScreen from './view/screens/InputScreen.jsx'
+import RegisLogin from './view/screens/RegisLogin.jsx'
 import Brave from './view/images/brave.png'
 import CrazyRich from './view/images/crazyRich.png'
 import Educated from './view/images/educated.png'
@@ -61,11 +64,13 @@ function App() {
   return (
     <div>
       <h1 className="App">hello world</h1>
-      <div className="container">
-        <div className="row">
-          {renderArrBooks()}
-        </div>
-      </div>
+      {/* <div className="container">
+        <div className> */}
+          {/* {renderArrBooks()} */}
+          {/* <CounterScreen/> */}
+        {/* </div>
+      </div> */}
+      <RegisLogin/>
     </div>
   )
 }
