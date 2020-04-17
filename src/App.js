@@ -1,14 +1,25 @@
 import React from 'react';
+import {BrowserRouter, Route, Switch} from "react-router-dom"
+
 import './App.css'
 import './bootstrap.css'
+
 import BookCard from './view/components/BookCard.jsx'
+
 import CounterScreen from './view/screens/CounterScreen.jsx'
 import InputScreen from './view/screens/InputScreen.jsx'
-import RegisLogin from './view/screens/RegisLogin.jsx'
+import Register from './view/screens/Register.jsx'
+import Registrasi from './view/screens/Registrasi';
+import LifeCycle from './view/screens/LifeCycle.jsx'
+import LoginScreen from './view/screens/LoginScreen';
+import ProfileScreen from './view/screens/ProfileScreen';
+
 import Brave from './view/images/brave.png'
 import CrazyRich from './view/images/crazyRich.png'
 import Educated from './view/images/educated.png'
 import Handmaid from './view/images/handmaid.png'
+import PageNotFound from './view/screens/PageNotFound';
+import Navbar from './view/components/Navbar';
 
 
 function App() {  
@@ -62,16 +73,29 @@ function App() {
 }
 
   return (
-    <div>
-      <h1 className="App">hello world</h1>
-      {/* <div className="container">
-        <div className> */}
-          {/* {renderArrBooks()} */}
-          {/* <CounterScreen/> */}
-        {/* </div>
-      </div> */}
-      <RegisLogin/>
-    </div>
+    // <div>
+    //   <h1 className="App">hello world</h1>
+    //   {/* <div className="container">
+    //     <div className> */}
+    //       {/* {renderArrBooks()} */}
+          
+    //     {/* </div>
+    //   </div> */}
+    //   <LifeCycle/>
+    // </div>
+    <BrowserRouter>
+    <Navbar/>
+      <Switch>
+        <Route exact path="/profile/:username" component={ProfileScreen}/>
+        <Route exact path="/regis" component={Registrasi}/>
+        <Route exact path="/counter" component={CounterScreen}/>
+        <Route exact path="/lifeCycle" component={LifeCycle}/>
+        <Route exact path="/input" component={InputScreen}/>
+        <Route exact path="/" component={LoginScreen}/>
+        <Route path="*" component={PageNotFound}/>
+        
+      </Switch>
+    </BrowserRouter>
   )
 }
 

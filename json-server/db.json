@@ -1,0 +1,34 @@
+{
+  "posts": [],
+  "comments": [],
+  "users": [
+    {
+      "id": 2,
+      "username": "seto",
+      "password": "password",
+      "role": "user",
+      "fullName": "seto haha"
+    },
+    {
+      "username": "Yeko",
+      "fullName": "Yeko Sebayang",
+      "password": "kasih",
+      "role": "Pengguna Gelombang",
+      "id": 4
+    },
+    {
+      "username": "Sinyo",
+      "password": "hitam",
+      "fullName": "Sinyo Hitam",
+      "role": "user",
+      "id": 5
+    },
+    {
+      "username": "Sinyox",
+      "password": "user",
+      "fullName": "Sinyo Hitam",
+      "role": "user",
+      "id": 6
+    }
+  ]
+}

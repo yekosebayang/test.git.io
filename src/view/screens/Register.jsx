@@ -1,6 +1,7 @@
 import React from "react"
+import {Link} from "react-router-dom"
 
-class RegisLogin extends React.Component{
+class Register extends React.Component{
     state = 
         {
             username: "",
@@ -10,16 +11,55 @@ class RegisLogin extends React.Component{
             passwordSimpan: ["passwordTest"],
             usernameInput: "",
             passwordInput: "",
+            edit: false
+
         }
         
     render(){
-        let hello = "Hello"
 
-        const testing = () => {
-            alert(usernameSimpan[1])
+        const deleteArr = (idx) => {
+            let temp = [...usernameSimpan]
+            let temp2 = [...passwordSimpan]
+            temp.splice(idx,1)
+            this.setState({usernameSimpan: temp})
+            this.setState({passwordSimpan: temp2})
+        }
+
+        const editArr = (idx) => {
+            edit = true    
+        }
+
+        const renderArr = () => {
+            return usernameSimpan.map((val, idx) => {
+                // if (edit == false){
+                //     return (
+                //       <tr>
+                //         <td>{usernameSimpan[idx]}</td>
+                //         <td><input className="btn btn-primary" type="button" value="Edit" onClick={() => editArr(idx)}/></td>     
+                //       </tr>)
+                // }
+                // else if (edit == true){
+                //     return (
+                //       <tr>
+                //         <td>{usernameSimpan[idx]}</td>
+                //         <td><input className="btn btn-danger" type="button" value="Delete" onClick={() => deleteArr(idx)}/>
+                //          </td>     
+                //       </tr>)
+                // }
+                return (
+                          <tr>
+                            <td>{usernameSimpan[idx]}</td>
+                            <td>
+                                <Link to={"/profile/" + usernameSimpan[idx]}>
+                                    {/* <input className="btn btn-primary" type="button" value="LOGIN" onClick={() => editArr(idx)}/> */}
+                                    <input className="btn btn-primary" type="button" value="LOGIN"/>
+                                </Link>
+                            </td>     
+                          </tr>)  
+            })
         }
             
-        const { username, password , rpassword , usernameSimpan , passwordSimpan , usernameInput , passwordInput} = this.state
+        const { edit, username, password , rpassword , usernameSimpan , passwordSimpan , usernameInput , passwordInput} = this.state
 
         const inputHandler = (event, field) => {
             if (field != "register" && field != "login"){
@@ -62,11 +102,12 @@ class RegisLogin extends React.Component{
 
         return(
             <div>
-                <div>
+                <div className="card col-3">
                     {/* <input onClick={testing} type="button" value="console.log"/> */}
                     <div className="text-center">
                         <p>
                             <input
+                            value={username}
                             onChange={(event) => inputHandler(event, "username")}
                             type="text" 
                             placeholder="UserName"
@@ -98,7 +139,7 @@ class RegisLogin extends React.Component{
 
             </div>
 
-            <div>
+            {/* <div>
                 <h3 className="text-center"> Login </h3>
                     <div className="text-center">
                         <p>
@@ -121,10 +162,26 @@ class RegisLogin extends React.Component{
                     <div className="text-center">
                         <input onClick={(event) => inputHandler(event, "login")} type="button" value="login"/>
                     </div>
-            </div>           
+            </div>            */}
+
+            <div>
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <td>Username</td>
+                            <td colspan="2"><strong>Pilih</strong></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {renderArr()}
+                    </tbody>
+                </table>
+            </div>
+
+            
         </div>
         )
     }
 }
 
-export default RegisLogin
+export default Register

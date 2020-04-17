@@ -20,7 +20,7 @@ const TableProduct = () => {
           
           )
         })
-        }
+      }
 
         const renderHeader = () => {
            return (
