@@ -7,10 +7,10 @@ import './bootstrap.css'
 import BookCard from './view/components/BookCard.jsx'
 
 import CounterScreen from './view/screens/CounterScreen.jsx'
-import InputScreen from './view/screens/InputScreen.jsx'
 import Register from './view/screens/Register.jsx'
-import Registrasi from './view/screens/Registrasi';
 import LifeCycle from './view/screens/LifeCycle.jsx'
+import InputScreen from './view/screens/InputScreen.jsx';
+import Registrasi from './view/screens/Registrasi';
 import LoginScreen from './view/screens/LoginScreen';
 import ProfileScreen from './view/screens/ProfileScreen';
 
@@ -20,6 +20,7 @@ import Educated from './view/images/educated.png'
 import Handmaid from './view/images/handmaid.png'
 import PageNotFound from './view/screens/PageNotFound';
 import Navbar from './view/components/Navbar';
+import TodoReduxScreen from './view/screens/TodoReduxScreen';
 
 
 function App() {  
@@ -86,14 +87,14 @@ function App() {
     <BrowserRouter>
     <Navbar/>
       <Switch>
-        <Route exact path="/profile/:username" component={ProfileScreen}/>
+        <Route exact path="/profile/:id" component={ProfileScreen}/>
         <Route exact path="/regis" component={Registrasi}/>
-        <Route exact path="/counter" component={CounterScreen}/>
-        <Route exact path="/lifeCycle" component={LifeCycle}/>
+        {/* <Route exact path="/counter" component={CounterScreen}/> */}
+        {/* <Route exact path="/lifeCycle" component={LifeCycle}/> */}
         <Route exact path="/input" component={InputScreen}/>
         <Route exact path="/" component={LoginScreen}/>
+        <Route exact path="/todo" component={TodoReduxScreen}/>
         <Route path="*" component={PageNotFound}/>
-        
       </Switch>
     </BrowserRouter>
   )

@@ -1,13 +1,17 @@
 import React from "react"
 import Axios from "axios"
 
-import {Link, Redirect} from "react-router-dom"
+import {Redirect} from "react-router-dom"
+import {connect} from 'react-redux'
+import {userInputHandler} from '../../redux/actions'
 
+// sweet alert
 class LoginScreen extends React.Component{
     state = 
         {
             usernameInput: "",
             passwordInput: "",
+            id: 0,
             redirect: false
         }
     InputHandler = (e, field) => {
@@ -15,7 +19,7 @@ class LoginScreen extends React.Component{
     }
     getDataHandler = () => {
     
-    const { usernameInput , passwordInput} = this.state
+    const { usernameInput , passwordInput } = this.state
 
     Axios.get("http://localhost:3001/users" ,{
         params: {
@@ -24,13 +28,13 @@ class LoginScreen extends React.Component{
         }
     })
     .then((res) => { 
-        console.log(res.data)
-        console.log(res.data.length)
-        if (res.data.length == 0){
+        if (res.data.length === 0){
             alert("Username tidak ditemukan / password tidak sesuai")
         }
         else{
+            this.setState({id: res.data[0].id})
             this.setState({redirect: true})
+            this.props.onChangeUser(usernameInput)
         }
     })
     .catch((err) => {
@@ -42,9 +46,10 @@ class LoginScreen extends React.Component{
 
     render(){
               // return <Redirect to={`/profile/${currentUsername}`} />;
-        const { redirect , usernameInput } = this.state
-        if (redirect == true){
-            return <Redirect to={`/profile/${usernameInput}`}/>
+        const { redirect , id } = this.state
+        if (redirect === true){
+            // return <Redirect to={`/profile/${usernameInput}`}/>
+            return <Redirect to={`/profile/${id}`}/>
         }
         else {
             return(
@@ -67,4 +72,13 @@ class LoginScreen extends React.Component{
     }
 }
 
-export default LoginScreen
+const mapStateToProps = (state) => {
+    return{
+        user: state.user
+    }
+}
+const mapDispatchToProps = {
+    onChangeUser: userInputHandler,
+}
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen) //objek jika memiliki nama yang sama, gausah di ...: ...
+    

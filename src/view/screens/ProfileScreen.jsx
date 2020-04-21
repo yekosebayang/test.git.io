@@ -8,7 +8,7 @@ class ProfileScreen extends React.Component{
         username: "",
         role: "",
         fullname: "",
-        id: ""
+        id: 0
     }
     deleteDataHandler = () => {
     const { id } = this.state
@@ -22,21 +22,17 @@ class ProfileScreen extends React.Component{
         })
     }
     componentDidMount = () => {
-
-        Axios.get("http://localhost:3001/users")
+        let userId = this.props.match.params.id 
+        Axios.get(`${API_URL}users/${userId}`)
         .then((res) => { 
-            //res = response dari API
-            for (let i = 0; i < res.data.length; i++){
-                if (res.data[i].username == this.props.match.params.username){
-                    alert(res.data[i].id)
-                    this.setState({username: res.data[i].username})
-                    this.setState({username: res.data[i].fullname})
-                    this.setState({role: res.data[i].role})
-                    this.setState({id: res.data[i].id})
-                }
-            }
-            // console.log(res.data[0].id)
-            // console.log(res.data.length)
+            console.log(res)
+            const { id, username, role, fullName } = res.data;
+            this.setState({
+                username: username,
+                fullname: fullName,
+                role: role,
+                id: id
+            })
         })
         .catch((err) => {
             console.log(err)
@@ -63,9 +59,12 @@ class ProfileScreen extends React.Component{
     
     render() {
     const { username , role , fullname} = this.state
-        if (username == ""){
+        if (username === ""){
             return(
+                <>
+                <h1>hais {this.props.match.params.id}</h1>
                 <h1>kamu siapa?</h1>
+                </>
             )
         }
         return(

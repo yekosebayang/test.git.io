@@ -1,5 +1,6 @@
 import React from "react"
-import {link, Link} from "react-router-dom"
+import {Link} from "react-router-dom"
+import {connect} from "react-redux"
 
 class InputScreen extends React.Component{
     state = {
@@ -15,6 +16,7 @@ class InputScreen extends React.Component{
         }
         return(
             <div>
+                <h1>{this.props.haloDunia.todoInput}</h1>
                 <h1>Input Screen</h1>
                 <h3>username: {username}</h3>
                 <h3>email: {email}</h3>
@@ -44,4 +46,11 @@ class InputScreen extends React.Component{
     }
 }
 
-export default InputScreen
+// export default InputScreen
+const mapStateToProps = (state) => {
+    return{
+        haloDunia: state.haha
+    }
+}
+
+export default connect(mapStateToProps)(InputScreen);

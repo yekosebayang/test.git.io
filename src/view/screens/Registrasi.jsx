@@ -11,7 +11,8 @@ class Registrasi extends React.Component{
             password: "",
             roleInput: "",
             rpassword: "", 
-            redirect: false
+            redirect: false,
+            isLoading: false
 
         }
 
@@ -34,11 +35,11 @@ class Registrasi extends React.Component{
             }
         })
         .then((res) => {
-            if (passwordInput != rpassword){
+            if (passwordInput !== rpassword){
                 alert("Password harus sama")
             }
             else{
-                if (res.data.length == 1){
+                if (res.data.length === 1){
                     alert("data sudah terdaftar")
                 }
                 else {
@@ -62,7 +63,7 @@ class Registrasi extends React.Component{
     }
        
     render(){
-        // const { usernameInput , passwordInput } = this.state
+        const {isLoading} = this.state
         return(
             <div>
                 <div className="card col-3">
@@ -114,7 +115,8 @@ class Registrasi extends React.Component{
           
                     <div className="text-center">
                         <input onClick={this.getDataHandler} 
-                        type="button" value="register"/>
+                        type="button" value="register"
+                        disabled={isLoading}/>
                     </div>
                 </div>
             </div>
