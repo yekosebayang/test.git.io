@@ -1,6 +1,7 @@
 import React from "react"
 import {Link} from "react-router-dom"
 
+import {loginHandler} from '../../redux/actions'
 class Register extends React.Component{
     state = 
         {

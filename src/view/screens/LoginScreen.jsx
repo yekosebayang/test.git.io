@@ -3,7 +3,8 @@ import Axios from "axios"
 
 import {Redirect} from "react-router-dom"
 import {connect} from 'react-redux'
-import {userInputHandler} from '../../redux/actions'
+import {loginHandler} from '../../redux/actions'
+import { API_URL } from "../../constants/API"
 
 // sweet alert
 class LoginScreen extends React.Component{
@@ -17,31 +18,41 @@ class LoginScreen extends React.Component{
     InputHandler = (e, field) => {
         this.setState({ [field]: e.target.value })
     }
-    getDataHandler = () => {
+    // getDataHandler = () => {
     
-    const { usernameInput , passwordInput } = this.state
+    // const { usernameInput , passwordInput } = this.state
 
-    Axios.get("http://localhost:3001/users" ,{
-        params: {
+    // Axios.get(`${API_URL}users` ,{
+    //     params: {
+    //         username: usernameInput,
+    //         password: passwordInput
+    //     }
+    // })
+    // .then((res) => { 
+    //     if (res.data.length === 0){
+    //         alert("Username tidak ditemukan / password tidak sesuai")
+    //     }
+    //     else{
+    //         this.setState({id: res.data[0].id})
+    //         this.setState({redirect: true})
+    //         this.props.onChangeUser(usernameInput)
+    //     }
+    // })
+    // .catch((err) => {
+    //     console.log(err)
+        
+    // })
+    // console.log("bukan AXIOS")
+    // }
+    loginHandler = () => {
+        const {usernameInput, passwordInput} = this.state
+
+        const userData = { 
             username: usernameInput,
             password: passwordInput
         }
-    })
-    .then((res) => { 
-        if (res.data.length === 0){
-            alert("Username tidak ditemukan / password tidak sesuai")
-        }
-        else{
-            this.setState({id: res.data[0].id})
-            this.setState({redirect: true})
-            this.props.onChangeUser(usernameInput)
-        }
-    })
-    .catch((err) => {
-        console.log(err)
-        
-    })
-    console.log("bukan AXIOS")
+        this.props.onLogin(userData)
+        // this.setState({redirect: true})
     }
 
     render(){
@@ -56,6 +67,8 @@ class LoginScreen extends React.Component{
                 <div>
                     <div className="card center">
                         <h3>Login</h3>
+                        <p>username: {this.props.user.username}</p>
+                        <p>{this.props.user.errMsg}</p>
                         <input type="text" placeholder="Username"
                         onChange={(e) => this.InputHandler(e, "usernameInput")}
                         />
@@ -64,7 +77,8 @@ class LoginScreen extends React.Component{
                         />
                         <input type="button" value="Login"
                         className="btn btn-primary"
-                        onClick={this.getDataHandler}/>
+                        // onClick={this.getDataHandler}/>
+                        onClick={this.loginHandler}/>
                     </div>
                 </div>
             )
@@ -78,7 +92,7 @@ const mapStateToProps = (state) => {
     }
 }
 const mapDispatchToProps = {
-    onChangeUser: userInputHandler,
+    onLogin: loginHandler,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen) //objek jika memiliki nama yang sama, gausah di ...: ...
     

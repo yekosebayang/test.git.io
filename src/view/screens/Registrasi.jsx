@@ -1,6 +1,8 @@
 import React from "react"
 import Axios from "axios"
 
+import {connect} from 'react-redux'
+import {registerHandler} from '../../redux/actions'
 import {API_URL} from "../../constants/API"
 
 class Registrasi extends React.Component{
@@ -15,16 +17,6 @@ class Registrasi extends React.Component{
             isLoading: false
 
         }
-
-    // postDataHandler = () => {
-    //     const { usernameInput , passwordInput , roleInput} = this.state
-
-    //     Axios.post(`${API_URL}users`,{
-    //         username: usernameInput,
-    //         password: passwordInput,
-    //         role: roleInput
-    //     })
-    // }
 
     getDataHandler = () => {
         const { usernameInput , passwordInput , rpassword , roleInput , fullnameInput} = this.state
@@ -56,6 +48,21 @@ class Registrasi extends React.Component{
         .catch((err) => {
             console.log(err)
         })
+    }
+    regisHandlerRedux = () => {
+        const { usernameInput , passwordInput , rpassword , roleInput , fullnameInput} = this.state
+        const dataPost = {
+            username: usernameInput,
+            password: passwordInput,
+            fullName: fullnameInput,
+            role: roleInput
+        }
+        if (passwordInput !== rpassword){
+            alert("Password harus sama")
+        }
+        else{
+            this.props.onRegis(dataPost)
+        }
     }
 
     inputHandler = (e, field) => {
@@ -112,11 +119,11 @@ class Registrasi extends React.Component{
                             />
                         </p>
                     </div>
-          
                     <div className="text-center">
-                        <input onClick={this.getDataHandler} 
+                        <input onClick={this.regisHandlerRedux} 
                         type="button" value="register"
                         disabled={isLoading}/>
+                        <p>{this.props.user.errMsg}</p>
                     </div>
                 </div>
             </div>
@@ -124,4 +131,12 @@ class Registrasi extends React.Component{
     }          
 }
 
-export default Registrasi
+const mapStateToProps = (state) => {
+    return{
+        user: state.user
+    }
+}
+const mapDispatchToProps = {
+    onRegis: registerHandler,
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Registrasi)

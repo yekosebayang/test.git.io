@@ -29,6 +29,34 @@
       "fullName": "Sinyo Hitam",
       "role": "user",
       "id": 6
+    },
+    {
+      "username": "Deo",
+      "password": "12345",
+      "fullName": "Deo",
+      "role": "user",
+      "id": 7
+    },
+    {
+      "username": "Larry",
+      "password": "12345",
+      "fullName": "Larry the Crab",
+      "role": "user",
+      "id": 8
+    },
+    {
+      "username": "Adi",
+      "password": "user",
+      "fullName": "Adi Kori",
+      "role": "user",
+      "id": 9
+    },
+    {
+      "username": "Nata",
+      "password": "user",
+      "fullName": "d Coco",
+      "role": "user",
+      "id": 10
     }
   ]
 }

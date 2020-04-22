@@ -13,7 +13,7 @@ class Navbar extends React.Component{
                 <a href="">Ini Navbar</a> */}
                 <Link to="/regis">with link</Link>
                 <Link to="/todo">To Do</Link> 
-                <div>Selamat Datang {this.props.user.username}</div> 
+                <div>Selamat Datang, {this.props.user.username}</div> 
                 <div>
                     <div className="">
                         <Link className="p-2" to="/">Login</Link>

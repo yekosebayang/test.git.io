@@ -1,5 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Route, Switch} from "react-router-dom"
+import Cookie from 'universal-cookie'
 
 import './App.css'
 import './bootstrap.css'
@@ -22,9 +23,11 @@ import PageNotFound from './view/screens/PageNotFound';
 import Navbar from './view/components/Navbar';
 import TodoReduxScreen from './view/screens/TodoReduxScreen';
 
+const cookieObject = new Cookie()
+// function App (){  
+class App extends React.Component {
 
-function App() {  
-  let arrBooks = [
+  arrBooks = [
     {
       author: "Margaret Atwood",
       title: "The handmaid's tale",
@@ -67,37 +70,39 @@ function App() {
     },
   ];
 
-  const renderArrBooks = () => {
-    return arrBooks.map((val) => {
+  renderArrBooks = () => {
+    return this.arrBooks.map((val) => {
         return <BookCard kartuBuku = {val}/>
     })
-}
+  }
 
-  return (
-    // <div>
-    //   <h1 className="App">hello world</h1>
-    //   {/* <div className="container">
-    //     <div className> */}
-    //       {/* {renderArrBooks()} */}
-          
-    //     {/* </div>
-    //   </div> */}
-    //   <LifeCycle/>
-    // </div>
-    <BrowserRouter>
-    <Navbar/>
-      <Switch>
-        <Route exact path="/profile/:id" component={ProfileScreen}/>
-        <Route exact path="/regis" component={Registrasi}/>
-        {/* <Route exact path="/counter" component={CounterScreen}/> */}
-        {/* <Route exact path="/lifeCycle" component={LifeCycle}/> */}
-        <Route exact path="/input" component={InputScreen}/>
-        <Route exact path="/" component={LoginScreen}/>
-        <Route exact path="/todo" component={TodoReduxScreen}/>
-        <Route path="*" component={PageNotFound}/>
-      </Switch>
-    </BrowserRouter>
-  )
+  render() {
+    return (
+      // <div>
+      //   <h1 className="App">hello world</h1>
+      //   {/* <div className="container">
+      //     <div className> */}
+      //       {/* {renderArrBooks()} */}
+            
+      //     {/* </div>
+      //   </div> */}
+      //   <LifeCycle/>
+      // </div>
+      <BrowserRouter>
+      <Navbar/>
+        <Switch>
+          <Route exact path="/profile/:id" component={ProfileScreen}/>
+          <Route exact path="/regis" component={Registrasi}/>
+          {/* <Route exact path="/counter" component={CounterScreen}/> */}
+          {/* <Route exact path="/lifeCycle" component={LifeCycle}/> */}
+          <Route exact path="/input" component={InputScreen}/>
+          <Route exact path="/" component={LoginScreen}/>
+          <Route exact path="/todo" component={TodoReduxScreen}/>
+          <Route path="*" component={PageNotFound}/>
+        </Switch>
+      </BrowserRouter>
+    )
+  }
 }
 
 export default App
