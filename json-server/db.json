@@ -3,17 +3,31 @@
   "comments": [],
   "users": [
     {
-      "id": 2,
+      "id": 1,
       "username": "seto",
       "password": "password",
       "role": "user",
       "fullName": "seto haha"
     },
     {
+      "id": 2,
+      "username": "qwe",
+      "password": "qwe",
+      "role": "user",
+      "fullName": "seto haha"
+    },
+    {
+      "id": 3,
+      "username": "asd",
+      "password": "asd",
+      "role": "user",
+      "fullName": "seto haha"
+    },
+    {
       "username": "Yeko",
-      "fullName": "Yeko Sebayang",
       "password": "kasih",
       "role": "Pengguna Gelombang",
+      "fullName": "Yeko Sebayang",
       "id": 4
     },
     {

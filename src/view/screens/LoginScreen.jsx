@@ -1,11 +1,14 @@
 import React from "react"
 import Axios from "axios"
+import Cookie from 'universal-cookie'
 
 import {Redirect} from "react-router-dom"
 import {connect} from 'react-redux'
 import {loginHandler} from '../../redux/actions'
 import { API_URL } from "../../constants/API"
 
+
+const cookieObject = new Cookie()
 // sweet alert
 class LoginScreen extends React.Component{
     state = 
@@ -15,6 +18,19 @@ class LoginScreen extends React.Component{
             id: 0,
             redirect: false
         }
+    
+    //1. Login dan ubah global state menjadi data user
+    //  > id, username, fullname, role
+    //2. Check di app.js, jika global state user sudah terisi
+    //   dengan data user, set cookie dengan data user
+    componentDidUpdate(){
+    // jika this.props.user.id ada isi, berarti data serorang sudah dlm global state
+        if (this.props.user.id){
+            cookieObject.set("authData", JSON.stringify(this.props.user))
+            // this.state.redirect = true
+         }
+    }
+
     InputHandler = (e, field) => {
         this.setState({ [field]: e.target.value })
     }
@@ -60,7 +76,12 @@ class LoginScreen extends React.Component{
         const { redirect , id } = this.state
         if (redirect === true){
             // return <Redirect to={`/profile/${usernameInput}`}/>
-            return <Redirect to={`/profile/${id}`}/>
+            // console.log('id state global :'+this.props.user.id)
+            // this.setState({id: this.props.user.id})
+            // return <Redirect to={`/profile/${id}`}/>
+            return(
+                <><h1>...</h1></>
+            )
         }
         else {
             return(

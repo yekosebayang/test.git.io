@@ -1,6 +1,8 @@
 import React from 'react';
-import {BrowserRouter, Route, Switch} from "react-router-dom"
+import {BrowserRouter, Route, Switch, withRouter} from "react-router-dom"
 import Cookie from 'universal-cookie'
+import {connect} from 'react-redux'
+import {userKeepLogin} from './redux/actions'
 
 import './App.css'
 import './bootstrap.css'
@@ -76,6 +78,13 @@ class App extends React.Component {
     })
   }
 
+  componentDidMount = () => {
+    const cookieResult = cookieObject.get("authData")
+    if (cookieResult){
+      this.props.userKeepLogin(cookieResult)
+    }
+  }
+
   render() {
     return (
       // <div>
@@ -88,7 +97,8 @@ class App extends React.Component {
       //   </div> */}
       //   <LifeCycle/>
       // </div>
-      <BrowserRouter>
+      // <BrowserRouter>
+      <>
       <Navbar/>
         <Switch>
           <Route exact path="/profile/:id" component={ProfileScreen}/>
@@ -100,9 +110,18 @@ class App extends React.Component {
           <Route exact path="/todo" component={TodoReduxScreen}/>
           <Route path="*" component={PageNotFound}/>
         </Switch>
-      </BrowserRouter>
+      </>
+      // </BrowserRouter>
     )
   }
 }
 
-export default App
+const mapStateToProps = (state) => {
+  return{
+      user: state.user
+  }
+}
+const mapDispatchToProps = {
+  userKeepLogin
+}
+export default connect(mapStateToProps , mapDispatchToProps)(withRouter(App))
